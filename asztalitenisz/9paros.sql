@@ -1,0 +1,3 @@
+select distinct jatekos.nev
+from bajnok inner join jatekos on jatekos.id = bajnok.jatekos_id inner join versenyszam on versenyszam.id = bajnok.vsz_id
+where ev in (select ev from bajnok inner join jatekos on jatekos.id = bajnok.jatekos_id inner join versenyszam on versenyszam.id = bajnok.vsz_id where versenyszam.nev = 'vegyes páros' and jatekos.nev = 'Pergel Szandra') and jatekos.nev <> 'Pergel Szandra' and versenyszam.nev = 'vegyes páros';
