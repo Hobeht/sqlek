@@ -856,3 +856,21 @@ ALTER TABLE `kapcsolo`
   ADD CONSTRAINT `kapcsolo_ibfk_1` FOREIGN KEY (`oraid`) REFERENCES `orak` (`id`),
   ADD CONSTRAINT `kapcsolo_ibfk_2` FOREIGN KEY (`diakid`) REFERENCES `diakok` (`id`);
 COMMIT;
+
+select nev from diakok where telepules="Barnamalom";
+
+select datum, terem, orasorszam from orak where targy="angol" order by datum,orasorszam;
+
+select csoport,targy,datum from orak where csoport like "9%" and targy="matematika" or targy="fizika"
+order by targy;
+
+
+select telepules, count(*) from diakok group by telepules order by count(*);
+
+select distinct targy from orak order by targy;
+
+select nev,email,telefon from orak,diakok where diakok.id=kapcsolo.id and orak.id=kapcsolo.oraid and tanar="Angol Anna" and year(datum)=2028 and month(datum)=11 and day(datum)=10;
+
+select nev from diakok where telepules in(select telepules from diakok where nev="Majer Melinda") and nev<>"Majer Melinda";
+
+select  datum,orasorsza,targy,tanar,ferohely-count(oraid)as szabad from orak,diakok,kapcsolo where orak.id=kapcsolo.oraid group by oraid,ferohely having count(orak.id)<ferohely order by szabad desc;
